@@ -42,6 +42,13 @@ class PostController extends Controller
 
         return redirect()->route('posts.index');
     }
+
+    public function show($id)
+    {
+        $post = Posts::findOrFail($id);
+        return view('posts.show', compact('post'));
+    }
+
     public function destroy($id)
     {
         $post = Posts::findOrFail($id);

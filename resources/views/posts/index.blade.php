@@ -1,4 +1,12 @@
 @extends('layout')
+@if (session('success'))
+    <div class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+@endif
 
 @section('content')
     <div class="container mt-4">
@@ -35,10 +43,10 @@
                                         <i class="fas fa-pencil-alt"></i> Edit
                                     </a>
 
-                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus post ini?')">
+                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <button type="button" class="btn btn-sm btn-outline-danger delete-button">
                                             <i class="fas fa-trash"></i> Hapus
                                         </button>
                                     </form>

@@ -18,14 +18,18 @@ class PostController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $post = new Posts();
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->save();
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+    ]);
 
-        return redirect()->route('posts.index');
-    }
+    Posts::create($validated);
+
+    // Flash message
+    return redirect()->route('posts.index')->with('success', 'Post berhasil dibuat!');
+}
+
     
     public function edit($id)
     {
@@ -35,13 +39,18 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-        $post = Posts::findOrFail($id);
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->save();
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
 
-        return redirect()->route('posts.index');
+        $post = Posts::findOrFail($id);
+        $post->update($validated);
+
+        // Tambahkan flash message sukses
+        return redirect()->route('posts.index')->with('success', 'Selamat, post berhasil diedit!');
     }
+
 
     public function show($id)
     {
@@ -54,6 +63,7 @@ class PostController extends Controller
         $post = Posts::findOrFail($id);
         $post->delete();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('deleted', 'Post telah berhasil dihapus!');
     }
+
 }

@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Post;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Posts::all();
         return view('posts.index', compact('posts'));
     }
 
@@ -19,7 +19,7 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $post = new Post();
+        $post = new Posts();
         $post->title = $request->title;
         $post->content = $request->content;
         $post->save();
@@ -29,13 +29,13 @@ class PostController extends Controller
     
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Posts::findOrFail($id);
         return view('posts.edit', compact('post'));
     }
 
     public function update(Request $request, $id)
     {
-        $post = Post::findOrFail($id);
+        $post = Posts::findOrFail($id);
         $post->title = $request->title;
         $post->content = $request->content;
         $post->save();
@@ -44,7 +44,7 @@ class PostController extends Controller
     }
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
+        $post = Posts::findOrFail($id);
         $post->delete();
 
         return redirect()->route('posts.index');

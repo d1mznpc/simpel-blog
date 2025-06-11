@@ -67,32 +67,32 @@
 
                 {{-- FAQ 3 --}}
                 <div class="border p-4 rounded-lg">
-                    <button @click="selected !== 2 ? selected = 2 : selected = null"
+                    <button @click="selected !== 3 ? selected = 3 : selected = null"
                         class="flex justify-between w-full text-left text-sm font-medium text-gray-700 hover:text-blue-700 focus:outline-none">
                         <span>Bisa request fitur atau tanya seputar proyek ini?</span>
-                        <svg :class="selected === 2 ? 'transform rotate-180' : ''"
+                        <svg :class="selected === 3 ? 'transform rotate-180' : ''"
                             class="h-5 w-5 text-gray-500 transition-transform" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                    <div x-show="selected === 2" x-collapse class="mt-2 text-gray-600 text-sm">
+                    <div x-show="selected === 3" x-collapse class="mt-2 text-gray-600 text-sm">
                         Tentu! Silakan hubungi saya lewat kontak yang tersedia di halaman bawah.
                     </div>
                 </div>
 
                 {{-- FAQ 2 --}}
                 <div class="border p-4 rounded-lg">
-                    <button @click="selected !== 2 ? selected = 2 : selected = null"
+                    <button @click="selected !== 4 ? selected = 4 : selected = null"
                         class="flex justify-between w-full text-left text-sm font-medium text-gray-700 hover:text-blue-700 focus:outline-none">
                         <span>Ngoding nya pake apa?</span>
-                        <svg :class="selected === 2 ? 'transform rotate-180' : ''"
+                        <svg :class="selected === 4 ? 'transform rotate-180' : ''"
                             class="h-5 w-5 text-gray-500 transition-transform" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                    <div x-show="selected === 2" x-collapse class="mt-2 text-gray-600 text-sm">
+                    <div x-show="selected === 4" x-collapse class="mt-2 text-gray-600 text-sm">
                         Saya menggunakan Laravel 12 untuk backend, Tailwind CSS untuk desain, Font Awesome buat ikon, SweetAlert2 untuk notifikasi interaktif, dan Alpine.js untuk animasi ringan seperti toggle FAQ.
                     </div>
                 </div>

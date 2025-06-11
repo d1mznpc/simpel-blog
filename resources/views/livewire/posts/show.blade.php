@@ -24,7 +24,7 @@
                     <div class="mt-8">
                         <a href="{{ route('posts.index') }}"
                             class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 transition">
-                            <i class="fas fa-arrow-left mr-2"></i> Kembali ke Daftar
+                            <i class="fas fa-arrow-left mr-2"></i> Back To List
                         </a>
                     </div>
                 </article>

@@ -1,24 +1,26 @@
 <?php
+
 namespace App\Livewire\Posts;
 
 use Livewire\Component;
 use App\Models\Posts;
+use App\Http\Requests\PostRequest;
+use Illuminate\Support\Facades\Validator;
 
 class Create extends Component
 {
-    public $title, $content;
+    public $title = '';
+    public $content = '';
 
     public function store()
     {
-        $this->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ]);
+        // Menggunakan rules dari PostRequest
+        $validated = Validator::make(
+            ['title' => $this->title, 'content' => $this->content],
+            (new PostRequest())->rules()
+        )->validate();
 
-        Posts::create([
-            'title' => $this->title,
-            'content' => $this->content,
-        ]);
+        Posts::create($validated);
 
         session()->flash('success', 'Post berhasil dibuat!');
         return redirect()->route('posts.index');

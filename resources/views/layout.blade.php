@@ -11,18 +11,23 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <!-- Bootstrap & FontAwesome -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Livewire Styles -->
+    @livewireStyles
 </head>
 
-<body>
-    <div class="container">
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto py-6 px-4">
         @yield('content')
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Delete Confirmation -->
@@ -76,5 +81,9 @@
             });
         @endif
     </script>
+
+    <!-- Livewire Scripts -->
+    @livewireScripts
 </body>
+
 </html>

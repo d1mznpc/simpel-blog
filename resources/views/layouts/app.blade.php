@@ -17,6 +17,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <script src="//unpkg.com/alpinejs" defer></script>
+
     <!-- Livewire Styles -->
     @livewireStyles
 </head>
@@ -30,13 +32,19 @@
 
     <!-- Footer -->
     <footer class="py-6 border-t text-center text-sm text-gray-500">
-        <p>&copy; {{ date('Y') }} DimasBlog. All rights reserved.</p>
+        <p>&copy; {{ date('Y') }} DimasBlog. All rights reserved. <p>Jika ada saran hubungi saja sosial media saya dibawah ini.</p></p>
         <div class="mt-2 space-x-4">
             <a href="https://github.com/d1mznpc" class="text-gray-700 hover:text-black" target="_blank" rel="noopener">
                 <i class="fab fa-github fa-lg"></i>
             </a>
             <a href="https://instagram.com/d1mznpc" class="text-pink-600 hover:text-pink-700" target="_blank" rel="noopener">
                 <i class="fab fa-instagram fa-lg"></i>
+            </a>
+            <a href="https://wa.me/6283182357722?text=ini%20ada%20saran%20dari%20saya" class="text-lime-400 hover:text-lime-600" target="_blank" rel="noopener">
+                <i class="fab fa-whatsapp fa-lg"></i>
+            </a>
+            <a href="mailto:dimasakuq@email.com" class="text-gray-700 hover:text-blue-600" target="_blank" rel="noopener">
+                <i class="fas fa-envelope mr-1"></i>
             </a>
         </div>
     </footer>

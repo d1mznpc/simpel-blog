@@ -1,15 +1,15 @@
 <div>
-    <div class="container mt-5">
-        <div class="card shadow border-0">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0"><i class="fas fa-plus-circle"></i> Create a New Post</h4>
+    <div class="max-w-2xl mx-auto mt-10">
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <div class="bg-blue-600 text-white px-6 py-4">
+                <h4 class="text-lg font-semibold"><i class="fas fa-plus-circle mr-2"></i> Create a New Post</h4>
             </div>
 
-            <div class="card-body bg-white">
+            <div class="px-6 py-4">
                 {{-- Error Validasi --}}
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0">
+                    <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+                        <ul class="list-disc list-inside text-sm">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
@@ -18,24 +18,29 @@
                 @endif
 
                 {{-- Form Livewire --}}
-                <form wire:submit.prevent="store">
-                    <div class="form-group mb-3">
-                        <label for="title" class="fw-semibold">Title</label>
+                <form wire:submit.prevent="store" class="space-y-4">
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
                         <input type="text" wire:model.defer="title" id="title"
-                            class="form-control border-primary" required>
+                            class="mt-1 block w-full border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
+                            required>
                     </div>
 
-                    <div class="form-group mb-4">
-                        <label for="content" class="fw-semibold">Content</label>
-                        <textarea wire:model.defer="content" id="content" rows="5" class="form-control border-primary" required></textarea>
+                    <div>
+                        <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+                        <textarea wire:model.defer="content" id="content" rows="5"
+                            class="mt-1 block w-full border border-blue-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
+                            required></textarea>
                     </div>
 
-                    <div class="d-flex justify-content-between">
-                        <a href="{{ route('posts.index') }}" class="btn btn-outline-primary">
-                            <i class="fas fa-arrow-left"></i> Cancel
+                    <div class="flex justify-between items-center pt-4">
+                        <a href="{{ route('posts.index') }}"
+                            class="inline-flex items-center px-4 py-2 border border-blue-600 text-blue-600 text-sm font-medium rounded hover:bg-blue-100 transition">
+                            <i class="fas fa-arrow-left mr-2"></i> Cancel
                         </a>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Save
+                        <button type="submit"
+                            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 transition">
+                            <i class="fas fa-save mr-2"></i> Save
                         </button>
                     </div>
                 </form>

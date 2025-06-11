@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\Posts\Index;
-use App\Http\Livewire\Posts\Create;
-use App\Http\Livewire\Posts\Edit;
-use App\Http\Livewire\Posts\Show;
+use App\Livewire\Posts\Index;
+use App\Livewire\Posts\Show;
+use App\Livewire\Posts\Create;
+use App\Livewire\Posts\Edit;
 
 Route::get('/posts', Index::class)->name('posts.index');
 Route::get('/posts/create', Create::class)->name('posts.create');

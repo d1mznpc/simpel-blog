@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Livewire\Posts;
+namespace App\Livewire\Posts;
 
 use Livewire\Component;
 use App\Models\Posts;
@@ -35,6 +35,7 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.posts.edit');
+        return view('livewire.posts.edit')
+            ->layout('layouts.app');
     }
 }

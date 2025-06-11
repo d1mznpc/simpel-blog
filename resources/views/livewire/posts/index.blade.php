@@ -1,53 +1,48 @@
 <div>
     <div>
-        @if (session()->has('success'))
-            <div class="container mt-3">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </div>
-        @endif
-
-        <div class="container mt-4">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="mb-0"><i class="fas fa-list me-2 text-primary"></i>Daftar Postingan</h3>
-                <a href="{{ route('posts.create') }}" class="btn btn-primary">
-                    <i class="fas fa-plus me-1"></i> Buat Post Baru
+        <div class="max-w-6xl mx-auto mt-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-semibold text-blue-700 flex items-center">
+                    <i class="fas fa-list mr-2"></i> List Post
+                </h3>
+                <a href="{{ route('posts.create') }}"
+                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 transition">
+                    <i class="fas fa-plus mr-2"></i> Create New Post
                 </a>
             </div>
 
             @if ($posts->count())
-                <div class="table-responsive">
-                    <table class="table table-bordered align-middle bg-white shadow-sm">
-                        <thead class="table-primary">
+                <div class="overflow-x-auto bg-white shadow rounded-lg">
+                    <table class="min-w-full table-auto border border-gray-200">
+                        <thead class="bg-blue-100 text-left text-gray-700 text-sm">
                             <tr>
-                                <th style="width: 50px;">No</th>
-                                <th>Judul Blog</th>
-                                <th style="width: 180px;">Tanggal Dibuat</th>
-                                <th style="width: 220px;">Aksi</th>
+                                <th class="px-4 py-3 border-b">No</th>
+                                <th class="px-4 py-3 border-b">Title</th>
+                                <th class="px-4 py-3 border-b">Date Created</th>
+                                <th class="px-4 py-3 border-b">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-sm text-gray-800">
                             @foreach ($posts as $index => $post)
-                                <tr>
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>
-                                        <a href="{{ route('posts.show', $post->id) }}" class="text-dark fw-semibold">
+                                <tr class="hover:bg-gray-50 border-b">
+                                    <td class="px-4 py-2">{{ $index + 1 }}</td>
+                                    <td class="px-4 py-2">
+                                        <a href="{{ route('posts.show', $post->id) }}"
+                                            class="text-blue-700 font-medium hover:underline">
                                             {{ $post->title }}
                                         </a>
                                     </td>
-                                    <td>{{ $post->created_at->format('d M Y') }}</td>
-                                    <td>
+                                    <td class="px-4 py-2">{{ $post->created_at->format('d M Y') }}</td>
+                                    <td class="px-4 py-2 flex gap-2">
                                         <a href="{{ route('posts.edit', $post->id) }}"
-                                            class="btn btn-sm btn-outline-primary me-1">
-                                            <i class="fas fa-pencil-alt"></i> Edit
+                                            class="inline-flex items-center px-3 py-1 text-blue-600 border border-blue-600 rounded hover:bg-blue-600 hover:text-white transition text-xs">
+                                            <i class="fas fa-pencil-alt mr-1"></i> Edit
                                         </a>
-
-                                        <button wire:click="deletePost({{ $post->id }})"
-                                            class="btn btn-sm btn-outline-danger">
-                                            <i class="fas fa-trash"></i> Hapus
+                                        <button onclick="confirmDelete({{ $post->id }})"
+                                            class="inline-flex items-center px-3 py-1 text-red-600 border border-red-600 rounded hover:bg-red-600 hover:text-white transition text-xs">
+                                            <i class="fas fa-trash mr-1"></i> Remove
                                         </button>
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -55,11 +50,10 @@
                     </table>
                 </div>
             @else
-                <div class="alert alert-info shadow-sm">
-                    <i class="fas fa-info-circle me-2"></i> Belum ada post yang tersedia.
+                <div class="bg-blue-100 text-blue-800 p-4 rounded shadow text-sm mt-6">
+                    <i class="fas fa-info-circle mr-2"></i> Belum ada post yang tersedia.
                 </div>
             @endif
         </div>
     </div>
-
 </div>

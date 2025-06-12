@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class Create extends Component
 {
-    public $title = '';
-    public $content = '';
+    public string $title = '';
+    public string $content = '';
 
     public function store()
     {
-        // Menggunakan rules dari PostRequest
+        // Validasi menggunakan aturan dari Form Request
         $validated = Validator::make(
             ['title' => $this->title, 'content' => $this->content],
             (new PostRequest())->rules()
@@ -22,7 +22,7 @@ class Create extends Component
 
         Posts::create($validated);
 
-        session()->flash('success', 'Post berhasil dibuat!');
+        session()->flash('success', 'Post berhasil ditambahkan!');
         return redirect()->route('posts.index');
     }
 

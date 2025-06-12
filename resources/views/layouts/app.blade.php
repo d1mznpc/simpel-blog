@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
@@ -17,22 +18,42 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs" defer></script>
 
     <!-- Livewire Styles -->
     @livewireStyles
 </head>
 
-<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
-    <!-- Main Content -->
-    <main class="flex-grow container mx-auto py-6 px-4">
-        {{ $slot }}
-    </main>
+    <!-- Wrapper (Sidebar + Content) -->
+    <div class="flex flex-1">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border-r border-blue-200 shadow-sm flex-shrink-0">
+            <div class="px-6 py-6 border-b border-blue-100">
+                <h1 class="text-2xl font-bold text-blue-700">Dimas<span class="font-light text-gray-500">Blog</span></h1>
+            </div>
+            <nav class="flex flex-col px-4 py-4 space-y-2">
+                <a href="{{ route('posts.index') }}" class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
+                    <i class="fas fa-list mr-2"></i> Index Post
+                </a>
+                <a href="{{ route('posts.create') }}" class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
+                    <i class="fas fa-plus mr-2"></i> Create Post
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 overflow-auto">
+            {{ $slot }}
+        </main>
+    </div>
 
     <!-- Footer -->
     <footer class="py-6 border-t text-center text-sm text-gray-500">
-        <p>&copy; {{ date('Y') }} DimasBlog. All rights reserved. <p>Jika ada saran hubungi saja sosial media saya dibawah ini.</p></p>
+        <p>&copy; {{ date('Y') }} DimasBlog. All rights reserved.</p>
+        <p>Jika ada saran hubungi saja sosial media saya dibawah ini.</p>
         <div class="mt-2 space-x-4">
             <a href="https://github.com/d1mznpc" class="text-gray-700 hover:text-black" target="_blank" rel="noopener">
                 <i class="fab fa-github fa-lg"></i>
@@ -44,7 +65,7 @@
                 <i class="fab fa-whatsapp fa-lg"></i>
             </a>
             <a href="mailto:dimasakuq@email.com" class="text-gray-700 hover:text-blue-600" target="_blank" rel="noopener">
-                <i class="fas fa-envelope mr-1"></i>
+                <i class="fas fa-envelope fa-lg"></i>
             </a>
         </div>
     </footer>
@@ -77,31 +98,30 @@
     <!-- Flash Message -->
     <script>
         @if (session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: 'Berhasil',
-            text: '{{ session('success') }}',
-            showConfirmButton: false,
-            timer: 2000
-        });
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 2000
+            });
         @endif
 
         @if (session('deleted'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Dihapus!',
-            text: '{{ session('deleted') }}',
-            background: '#f8d7da',
-            color: '#842029',
-            showConfirmButton: false,
-            timer: 2000
-        });
+            Swal.fire({
+                icon: 'error',
+                title: 'Dihapus!',
+                text: '{{ session('deleted') }}',
+                background: '#f8d7da',
+                color: '#842029',
+                showConfirmButton: false,
+                timer: 2000
+            });
         @endif
     </script>
 
     <!-- Livewire Scripts -->
     @livewireScripts
-
 </body>
 
 </html>

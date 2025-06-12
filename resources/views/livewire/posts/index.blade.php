@@ -1,4 +1,22 @@
 <div>
+    @if (session()->has('success'))
+        <div x-data="{ show: true }" x-show="show" x-transition class="max-w-6xl mx-auto mt-4">
+            <div class="bg-green-100 border border-green-300 text-green-800 px-4 py-3 rounded relative flex justify-between items-start"
+                role="alert">
+                <div>
+                    <strong class="font-bold">Sukses!</strong>
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                </div>
+                <button @click="show = false" class="text-green-700 hover:text-green-900 ml-4">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M10 8.586l4.95-4.95a1 1 0 111.414 1.414L11.414 10l4.95 4.95a1 1 0 01-1.414 1.414L10 11.414l-4.95 4.95a1 1 0 01-1.414-1.414L8.586 10l-4.95-4.95A1 1 0 115.05 3.636L10 8.586z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    @endif
     <div>
         <div class="max-w-6xl mx-auto mt-8">
             <div class="flex justify-between items-center mb-6">
@@ -51,7 +69,8 @@
                 </div>
             @else
                 <div class="bg-blue-100 text-blue-800 p-4 rounded shadow text-sm mt-6">
-                    <i class="fas fa-info-circle mr-2"></i> Belum ada post yang tersedia.
+                    <i class="fas fa-info-circle mr-2"></i> Post not found. <a href="{{ route('posts.create') }}"
+                        class="text-blue-600 hover:underline">Create your first post</a>.
                 </div>
             @endif
         </div>

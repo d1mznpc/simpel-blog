@@ -20,8 +20,7 @@ class Index extends Component
         $post = Posts::findOrFail($id);
         $post->delete();
 
-        session()->flash('deleted', 'Post berhasil dihapus!');
-        $this->posts = Posts::all(); // Refresh daftar
+        return redirect()->route('posts.index')->with('success', 'Post berhasil dihapus!');
     }
 
 

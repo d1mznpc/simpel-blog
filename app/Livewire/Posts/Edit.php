@@ -34,7 +34,7 @@ class Edit extends Component
         // Update post
         Posts::findOrFail($this->postId)->update($validated);
 
-        session()->flash('success', 'Post berhasil diupdate!');
+        session()->flash('success', 'Post berhasil diperbarui!');
         return redirect()->route('posts.index');
     }
 

@@ -41,49 +41,84 @@
                 </h1>
             </div>
 
-            <nav class="flex flex-col px-4 py-4 space-y-2" x-data="{ open: false }">
+            <nav class="flex flex-col px-4 py-4 space-y-2">
                 <!-- Index Post -->
                 <a href="{{ route('posts.index') }}"
-                    class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
+                    class="flex items-center px-4 py-2 border rounded transition
+                        {{ request()->routeIs('posts.index') ? 'bg-blue-600 text-white border-blue-600' : 'border-blue-500 text-blue-700 hover:bg-blue-50' }}">
                     <i class="fas fa-list mr-2"></i> Index Post
                 </a>
 
                 <!-- Create Post -->
                 <a href="{{ route('posts.create') }}"
-                    class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
+                    class="flex items-center px-4 py-2 border rounded transition
+                        {{ request()->routeIs('posts.create') ? 'bg-blue-600 text-white border-blue-600' : 'border-blue-500 text-blue-700 hover:bg-blue-50' }}">
                     <i class="fas fa-plus mr-2"></i> Create Post
                 </a>
-                
-                <!-- About Post -->
+
+                <!-- Edit Post (Dropdown) -->
+                <div x-data="{ open: {{ request()->routeIs('posts.edit') ? 'true' : 'false' }} }">
+                    <!-- Dropdown Button -->
+                    <button @click="open = !open"
+                        class="flex items-center justify-between w-full px-4 py-2 border rounded transition
+            {{ request()->routeIs('posts.edit') ? 'bg-blue-600 text-white border-blue-600' : 'border-blue-500 text-blue-700 hover:bg-blue-50' }}">
+                        <span class="flex items-center">
+                            <i class="fas fa-pen-to-square mr-2"></i> Edit Post
+                        </span>
+                        <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+                    </button>
+
+                    <!-- Dropdown Items -->
+                    <div x-show="open" x-transition
+                        class="mt-1 border border-blue-100 bg-white rounded shadow overflow-hidden space-y-1 w-full">
+                        @foreach ($allPosts as $post)
+                            <a href="{{ route('posts.edit', $post->id) }}"
+                                class="block px-4 py-2 text-sm transition rounded
+                    {{ request()->routeIs('posts.edit') && request()->route('id') == $post->id
+                        ? 'bg-blue-600 text-white'
+                        : 'text-gray-800 hover:bg-blue-50 hover:text-blue-600' }}">
+                                {{ Str::limit($post->title, 30) }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+
+
+                <!-- About -->
                 <a href="{{ route('about') }}"
-                    class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
+                    class="flex items-center px-4 py-2 border rounded transition
+                        {{ request()->routeIs('about') ? 'bg-blue-600 text-white border-blue-600' : 'border-blue-500 text-blue-700 hover:bg-blue-50' }}">
                     <i class="fas fa-user mr-2"></i> About
                 </a>
 
-                <!-- Show Post Dropdown -->
-                <button @click="open = !open"
-                    class="flex items-center justify-between px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition w-full">
-                    <span class="flex items-center">
-                        <i class="fas fa-eye mr-2"></i> Show Post
-                    </span>
-                    <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
-                </button>
+                <!-- Show Post (Dropdown) -->
+                <div x-data="{ open: {{ request()->routeIs('posts.show') ? 'true' : 'false' }} }">
+                    <!-- Dropdown Button -->
+                    <button @click="open = !open"
+                        class="flex items-center justify-between w-full px-4 py-2 border rounded transition
+                            {{ request()->routeIs('posts.show') ? 'bg-blue-600 text-white border-blue-600' : 'border-blue-500 text-blue-700 hover:bg-blue-50' }}">
+                        <span class="flex items-center">
+                            <i class="fas fa-eye mr-2"></i> Show Post
+                        </span>
+                        <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+                    </button>
 
-                <!-- Dropdown Content -->
-                <div x-show="open" x-transition
-                    class="ml-4 mt-2 p-2 bg-white rounded shadow max-h-64 overflow-y-auto space-y-1 border border-blue-100">
-                    @foreach ($allPosts as $post)
-                        <a href="{{ route('posts.show', $post->id) }}"
-                            class="block text-sm text-gray-800 hover:text-blue-600 hover:bg-blue-50 px-2 py-1 rounded transition">
-                            {{ Str::limit($post->title, 30) }}
-                        </a>
-                    @endforeach
+                    <!-- Dropdown Items -->
+                    <div x-show="open" x-transition
+                        class="mt-1 border border-blue-100 bg-white rounded shadow overflow-hidden space-y-1 w-full">
+                        @foreach ($allPosts as $post)
+                            <a href="{{ route('posts.show', $post->id) }}"
+                                class="block px-4 py-2 text-sm transition rounded
+                            {{ request()->routeIs('posts.show') && request()->route('id') == $post->id
+                                ? 'bg-blue-600 text-white'
+                                : 'text-gray-800 hover:bg-blue-50 hover:text-blue-600' }}">
+                                {{ Str::limit($post->title, 30) }}
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
             </nav>
-
         </aside>
-
-
 
         <!-- Main Content -->
         <main class="flex-1 p-6 overflow-auto">

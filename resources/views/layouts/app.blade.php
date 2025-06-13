@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -29,20 +33,51 @@
 
     <!-- Wrapper (Sidebar + Content) -->
     <div class="flex flex-1">
+            
         <!-- Sidebar -->
-        <aside class="w-64 bg-white border-r border-blue-200 shadow-sm flex-shrink-0">
+        <aside class="w-64 h-screen sticky top-0 bg-white border-r border-blue-200 shadow-sm flex-shrink-0">
             <div class="px-6 py-6 border-b border-blue-100">
-                <h1 class="text-2xl font-bold text-blue-700">Dimas<span class="font-light text-gray-500">Blog</span></h1>
+                <h1 class="text-2xl font-bold text-blue-700">Dimas<span class="font-light text-gray-500">Blog</span>
+                </h1>
             </div>
-            <nav class="flex flex-col px-4 py-4 space-y-2">
-                <a href="{{ route('posts.index') }}" class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
+
+            <nav class="flex flex-col px-4 py-4 space-y-2" x-data="{ open: false }">
+                <!-- Index Post -->
+                <a href="{{ route('posts.index') }}"
+                    class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
                     <i class="fas fa-list mr-2"></i> Index Post
                 </a>
-                <a href="{{ route('posts.create') }}" class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
+
+                <!-- Create Post -->
+                <a href="{{ route('posts.create') }}"
+                    class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
                     <i class="fas fa-plus mr-2"></i> Create Post
                 </a>
+
+                <!-- Show Post Dropdown -->
+                <button @click="open = !open"
+                    class="flex items-center justify-between px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition w-full">
+                    <span class="flex items-center">
+                        <i class="fas fa-eye mr-2"></i> Show Post
+                    </span>
+                    <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+                </button>
+
+                <!-- Dropdown Content -->
+                <div x-show="open" x-transition
+                    class="ml-4 mt-2 p-2 bg-white rounded shadow max-h-64 overflow-y-auto space-y-1 border border-blue-100">
+                    @foreach ($allPosts as $post)
+                        <a href="{{ route('posts.show', $post->id) }}"
+                            class="block text-sm text-gray-800 hover:text-blue-600 hover:bg-blue-50 px-2 py-1 rounded transition">
+                            {{ Str::limit($post->title, 30) }}
+                        </a>
+                    @endforeach
+                </div>
             </nav>
+
         </aside>
+
+
 
         <!-- Main Content -->
         <main class="flex-1 p-6 overflow-auto">
@@ -58,13 +93,16 @@
             <a href="https://github.com/d1mznpc" class="text-gray-700 hover:text-black" target="_blank" rel="noopener">
                 <i class="fab fa-github fa-lg"></i>
             </a>
-            <a href="https://instagram.com/d1mznpc" class="text-pink-600 hover:text-pink-700" target="_blank" rel="noopener">
+            <a href="https://instagram.com/d1mznpc" class="text-pink-600 hover:text-pink-700" target="_blank"
+                rel="noopener">
                 <i class="fab fa-instagram fa-lg"></i>
             </a>
-            <a href="https://wa.me/6283182357722?text=ini%20ada%20saran%20dari%20saya" class="text-lime-400 hover:text-lime-600" target="_blank" rel="noopener">
+            <a href="https://wa.me/6283182357722?text=ini%20ada%20saran%20dari%20saya"
+                class="text-lime-400 hover:text-lime-600" target="_blank" rel="noopener">
                 <i class="fab fa-whatsapp fa-lg"></i>
             </a>
-            <a href="mailto:dimasakuq@email.com" class="text-gray-700 hover:text-blue-600" target="_blank" rel="noopener">
+            <a href="mailto:dimasakuq@email.com" class="text-gray-700 hover:text-blue-600" target="_blank"
+                rel="noopener">
                 <i class="fas fa-envelope fa-lg"></i>
             </a>
         </div>

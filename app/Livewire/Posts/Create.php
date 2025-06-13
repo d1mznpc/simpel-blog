@@ -3,28 +3,41 @@
 namespace App\Livewire\Posts;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Models\Posts;
-use App\Http\Requests\PostRequest;
-use Illuminate\Support\Facades\Validator;
 
 class Create extends Component
 {
-    public string $title = '';
-    public string $content = '';
+    use WithFileUploads;
+
+    public $title, $content, $image;
 
     public function store()
     {
-        // Validasi menggunakan aturan dari Form Request
-        $validated = Validator::make(
-            ['title' => $this->title, 'content' => $this->content],
-            (new PostRequest())->rules()
-        )->validate();
+        $this->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-        Posts::create($validated);
+        logger('Image upload start');
+        logger($this->image); // cek isi image
 
-        session()->flash('success', 'Post berhasil ditambahkan!');
+        $imagePath = $this->image->store('images/posts', 'public');
+
+        logger('Stored at: ' . $imagePath);
+
+        Posts::create([
+            'title' => $this->title,
+            'content' => $this->content,
+            'image' => $imagePath,
+        ]);
+
+        session()->flash('success', 'Post berhasil dibuat!');
         return redirect()->route('posts.index');
     }
+
+
 
     public function render()
     {

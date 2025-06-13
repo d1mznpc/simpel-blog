@@ -1,18 +1,14 @@
 <?php
 
 namespace App\Livewire\Posts;
+
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Models\Posts;
 
 class Index extends Component
 {
-    public $posts;
-
-    public function mount()
-    {
-        $this->posts = Posts::all();
-    }
+    public $search = '';
 
     #[On('deletePostConfirmed')]
     public function deletePostConfirmed($id)
@@ -23,10 +19,15 @@ class Index extends Component
         return redirect()->route('posts.index')->with('success', 'Post berhasil dihapus!');
     }
 
-
     public function render()
     {
-        return view('livewire.posts.index')
-            ->layout('layouts.app');
+        $posts = Posts::query()
+            ->when($this->search, fn($q) =>
+                $q->where('title', 'like', '%' . $this->search . '%')
+            )
+            ->latest()
+            ->get();
+
+        return view('livewire.posts.index', compact('posts'))->layout('layouts.app');
     }
 }

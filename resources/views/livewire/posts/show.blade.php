@@ -2,6 +2,13 @@
     {{-- Konten --}}
     <main class="max-w-6xl mx-auto mt-10 px-4">
         <div class="bg-white shadow-lg rounded-xl p-6 md:p-8">
+            @if ($post->image)
+                <div class="mb-6">
+                    <img src="{{ asset('storage/' . $post->image) }}"
+                        class="w-full max-h-[400px] object-contain rounded-md shadow border border-gray-200"
+                        alt="{{ $post->title }}">
+                </div>
+            @endif
             <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 mb-4">{{ $post->title }}</h2>
             <p class="text-sm text-gray-500 italic mb-6">
                 <i class="fa-regular fa-calendar mr-1"></i>

@@ -33,7 +33,7 @@
 
     <!-- Wrapper (Sidebar + Content) -->
     <div class="flex flex-1">
-            
+
         <!-- Sidebar -->
         <aside class="w-64 h-screen sticky top-0 bg-white border-r border-blue-200 shadow-sm flex-shrink-0">
             <div class="px-6 py-6 border-b border-blue-100">
@@ -52,6 +52,12 @@
                 <a href="{{ route('posts.create') }}"
                     class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
                     <i class="fas fa-plus mr-2"></i> Create Post
+                </a>
+                
+                <!-- About Post -->
+                <a href="{{ route('about') }}"
+                    class="flex items-center px-4 py-2 border border-blue-500 text-blue-700 rounded hover:bg-blue-50 transition">
+                    <i class="fas fa-user mr-2"></i> About
                 </a>
 
                 <!-- Show Post Dropdown -->
